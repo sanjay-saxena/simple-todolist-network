@@ -248,6 +248,11 @@ You can use `./scripts/list.sh` to look at the assets that were created by the `
 
 ## Generate Angular2 app
 
+First install the generator:
+```
+npm install -g generator-hyperledger-composer
+```
+
 Here is the step to generate the Angular2 app for Todo List using Yeoman:
 
 ```
