@@ -21,9 +21,9 @@ $ ./scripts/downloadHyperledger.sh
 $ ./scripts/startHyperledger.sh
 ```
 
-Hyperledger Composer provides higher-level abstractions to hide the complexity of the blockchain technologies that are implemented as part of Hyperleder Fabric. A Blockchain app that is built by Hyperledger Composer relies on a `Business Network` as an abstraction that helps orchestrate the transfer of assets. A `Business Network` comprises of `Business Model`, `Business Logic`, and `Access Control Lists`.
+Hyperledger Composer provides higher-level abstractions to hide the complexity of the blockchain technologies that are implemented as part of Hyperledger Fabric. A Blockchain app that is built by Hyperledger Composer relies on a `Business Network` as an abstraction that helps orchestrate the transfer of assets. A `Business Network` comprises of `Business Model`, `Business Logic`, and `Access Control Lists`.
 
-The following sections provide the steps for creating the Todo List app backed by Blockchain. The Todo List Business Network is extremely simple and does not have support for authentication or authoriziation and so it will only contain the `Business Model` and `Business Logic` and there is no `Access Control Lists` defined in the network. The repo includes some scripts for creating a Business Network Archive(.bna), deploying the archive to Hyperledger Fabric, etc. for convenience.
+The following sections provide the steps for creating the Todo List app backed by Blockchain. The Todo List Business Network is extremely simple and does not have support for authentication or authorization and so it will only contain the `Business Model` and `Business Logic` and there is no `Access Control Lists` defined in the network. The repo includes some scripts for creating a Business Network Archive(.bna), deploying the archive to Hyperledger Fabric, etc. for convenience.
 
 ## Define a Business Model
 
@@ -162,7 +162,7 @@ function onBootstrap(txn) {
 }
 ```
 
-which implements the business logic for `Bootstrap` transaction. The `onBootstrap()` function creates an `Admin` instance for `bobby.da.boss` and `Superhero` instances for `batman`, `catwoman`, `spiderman`, and `superman` as participants. It also creates some `Task` instances to represent assets. The world state is populated using the assets and the participants and the `Bootstrap` transacction is added to the immutable ledger.
+which implements the business logic for `Bootstrap` transaction. The `onBootstrap()` function creates an `Admin` instance for `bobby.da.boss` and `Superhero` instances for `batman`, `catwoman`, `spiderman`, and `superman` as participants. It also creates some `Task` instances to represent assets. The world state is populated using the assets and the participants and the `Bootstrap` transaction is added to the immutable ledger.
 
 So, `bobby.da.boss`(our admin) can assign a task to a specific superhero by submitting the `Assign` transaction. As a result, Hyperledger Composer runtime will invoke the following `onAssignment()` function:
 
@@ -187,7 +187,7 @@ function onAssignment(txn) {
 }
 ```
 
-which updates the task's assignee field and upates the world state appropriately and the `Assign` transacton gets added to the immutable ledger.
+which updates the task's assignee field and updates the world state appropriately and the `Assign` transaction gets added to the immutable ledger.
 
 And, when a superhero completes a task, he/she can submit the `Execute` transaction. This will result in Hyperledger Composer invoking the following `onExecution()` function:
 
@@ -211,7 +211,7 @@ function onExecution(txn) {
     );
 }
 ```
-where the task is updated, world state reflects the change, and the `Execute` transcation gets added to the immutable ledger.
+where the task is updated, world state reflects the change, and the `Execute` transaction gets added to the immutable ledger.
 
 So, the changes to the world state are triggered in response to transactions being submitted and validated. And, eventually the transaction gets added to the immutable ledger.
 
