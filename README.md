@@ -85,7 +85,7 @@ The transactions are used to trigger the Business Logic.
 
 Hyperledger Composer allows Business Logic to be implemented using Javascript and provides a rich set of APIs to update and query the world state.
 
-The business logic for the Todo List Business Network is implemented in [lib/logic.js](./lib/logic.js]. For each of the three transaction types that are defined in the model, there is a corresponding transaction processor function that implements the business logic for that transaction.
+The business logic for the Todo List Business Network is implemented in [lib/logic.js](./lib/logic.js). For each of the three transaction types that are defined in the model, there is a corresponding transaction processor function that implements the business logic for that transaction.
 
 For example, when the `Bootstrap` transaction is submitted, Hyperledger Composer runtime will eventually invoke the following `onBootstrap()` function:
 
