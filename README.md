@@ -13,7 +13,8 @@ In order to create an Todo List app that is backed by Blockchain, you need to in
 Once you have Docker and Docker-compose installed, you can download and and start Hyperledger Fabric v1.0 as shown below:
 
 ```
-$ git clone <url-to-this-repo>
+$ cd ~/Workdir
+$ git clone https://github.com/sanjay-saxena/todolist-network-hlfv1
 $ cd ~/Workdir/todolist-network-hlfv1
 $ npm install
 $ ./scripts/downloadHyperledger.sh
