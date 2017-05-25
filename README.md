@@ -1,4 +1,4 @@
-# todolist-network-hlfv1
+# simple-todolist-network
 
 In order to create an Todo List app that is backed by Blockchain, you need to install the following:
 
@@ -14,8 +14,8 @@ Once you have Docker and Docker-compose installed, you can download and and star
 
 ```
 $ cd ~/Workdir
-$ git clone https://github.com/sanjay-saxena/todolist-network-hlfv1
-$ cd ~/Workdir/todolist-network-hlfv1
+$ git clone https://github.com/sanjay-saxena/simple-todolist-network
+$ cd ~/Workdir/simple-todolist-network
 $ npm install
 $ ./scripts/downloadHyperledger.sh
 $ ./scripts/startHyperledger.sh
@@ -93,7 +93,7 @@ For example, when the `Bootstrap` transaction is submitted, Hyperledger Composer
 ```
 /**
  * Bootstrap items for convenience.
- * @param {org.example.todolist.hlfv1.Bootstrap} txn -- the bootstrap transaction
+ * @param {org.example.simple.todolist.Bootstrap} txn -- Bootstrap transaction
  * @transaction
  */
 function onBootstrap(txn) {
@@ -102,21 +102,21 @@ function onBootstrap(txn) {
     var factory = getFactory();
 
     // Admin
-    var bossman = factory.newInstance('org.example.todolist.hlfv1',
+    var bossman = factory.newInstance('org.example.simple.todolist',
                                       'Admin',
                                       'bobby.da.boss@example.com');
     bossman.firstName = "Bobby";
     bossman.lastName = "Da Boss";
     admins.push(bossman);
 
-    var catwoman = factory.newInstance('org.example.todolist.hlfv1',
+    var catwoman = factory.newInstance('org.example.simple.todolist',
                                        'Superhero',
                                        'catwoman@example.com');
     catwoman.firstName = "Selina";
     catwoman.lastName = "Kyle";
     superheroes.push(catwoman);
 
-    var batman = factory.newInstance('org.example.todolist.hlfv1',
+    var batman = factory.newInstance('org.example.simple.todolist',
                                      'Superhero',
                                      'batman@example.com');
     batman.firstName = "Bruce";
@@ -125,7 +125,7 @@ function onBootstrap(txn) {
 
     ....
 
-    var task1 = factory.newInstance('org.example.todolist.hlfv1',
+    var task1 = factory.newInstance('org.example.simple.todolist',
                                     'Task',
                                     'T1');
     task1.description = "Build a Bat Mobile!";
@@ -135,20 +135,20 @@ function onBootstrap(txn) {
 
     ....
 
-    return getParticipantRegistry('org.example.todolist.hlfv1.Superhero')
+    return getParticipantRegistry('org.example.simple.todolist.Superhero')
            .then(function(shregistry) {
                superheroesRegistry = shregistry;
                return superheroesRegistry.addAll(superheroes);
            })
            .then(function() {
-               return getParticipantRegistry('org.example.todolist.hlfv1.Admin');
+               return getParticipantRegistry('org.example.simple.todolist.Admin');
            })
            .then(function(aregistry) {
                adminRegistry = aregistry;
                return adminRegistry.addAll(admins);
            })
            .then(function() {
-               return getAssetRegistry('org.example.todolist.hlfv1.Task');
+               return getAssetRegistry('org.example.simple.todolist.Task');
            })
            .then(function(tregistry) {
                tasksRegistry = tregistry;
@@ -169,7 +169,7 @@ So, `bobby.da.boss`(our admin) can assign a task to a specific superhero by subm
 ```
 /**
  * Assigns the item/task to a superhero.
- * @param {org.example.todolist.hlfv1.Assign} txn -- the Assign transaction
+ * @param {org.example.simple.todolist.Assign} txn -- Assign transaction
  * @transaction
  */
 function onAssignment(txn) {
@@ -179,7 +179,7 @@ function onAssignment(txn) {
     }
 
     task.assignee = txn.assignee;
-    return getAssetRegistry('org.example.todolist.hlfv1.Task')
+    return getAssetRegistry('org.example.simple.todolist.Task')
           .then(function(result) {
               result.update(txn.task);
           }
@@ -194,7 +194,7 @@ And, when a superhero completes a task, he/she can submit the `Execute` transact
 ```
 /**
  * Marks the item/task as COMPLETED once it has been successfully dealt with.
- * @param {org.example.todolist.hlfv1.Execute} txn -- the Execute transaction
+ * @param {org.example.simple.todolist.Execute} txn -- Execute transaction
  * @transaction
  */
 function onExecution(txn) {
@@ -204,7 +204,7 @@ function onExecution(txn) {
     }
 
     task.state = 'COMPLETED';
-    return getAssetRegistry('org.example.todolist.hlfv1.Task')
+    return getAssetRegistry('org.example.simple.todolist.Task')
           .then(function(result) {
               result.update(txn.task);
           }
@@ -220,18 +220,18 @@ So, the changes to the world state are triggered in response to transactions bei
 Once the Business Model and Business Logic is ready, they can be packaged up in a Business Network Archive(.bna) as shown below:
 
 ```
-$ cd ~/Workdir/todolist-network-hlfv1
+$ cd ~/Workdir/simple-todolist-network
 $ ./scripts/createArchive.sh
 ```
 
-This will result in the creation of `todolist-network-hlfv1.bna`.
+This will result in the creation of `simple-todolist-network.bna`.
 
 ## Deploy Business Network Archive
 
-Assuming that Hyperleder Fabric is running, here is the step to deploy `todolist-network-hflv1.bna` to it:
+Assuming that Hyperleder Fabric is running, here is the step to deploy `simple-todolist-network.bna` to it:
 
 ```
-$ cd ~/Workdir/todolist-network-hlfv1
+$ cd ~/Workdir/simple-todolist-network
 $ ./scripts/deploy.sh
 ```
 
@@ -240,7 +240,7 @@ $ ./scripts/deploy.sh
 In order to populate the world state for convenience, the `Bootstrap` transaction can be submitted as shown below:
 
 ```
-$ cd ~/Workdir/todolist-network-hlfv1
+$ cd ~/Workdir/simple-todolist-network
 $ ./scripts/bootstrapTransaction.sh
 ```
 
@@ -256,7 +256,7 @@ npm install -g generator-hyperledger-composer
 Here is the step to generate the Angular2 app for Todo List using Yeoman:
 
 ```
-$ cd ~/Workdir/todolist-network-hlfv1
+$ cd ~/Workdir/simple-todolist-network
 $ yo hyperledger-composer:angular
 
 Welcome to the Hyperledger Composer Angular2 skeleton app generator
@@ -265,14 +265,14 @@ Welcome to the Hyperledger Composer Angular2 skeleton app generator
 ? Description of the application: Skeleton Hyperledger Composer Angular2 project
 ? Author name: xxxx xxxxx
 ? Author email: foo@example.com
-? What is the Business Network Identifier?: todolist-network-hlfv1
+? What is the Business Network Identifier?: simple-todolist-network
 ? What is the Connection Profile to use? hlfv1
 ? Enrollment id: admin
 ? Enrollment Secret: adminpw
 Configuring: angular-app
 About to start creating files
 About to connect to a running business network
-Connected to: todolist-network-hlfv1
+Connected to: simple-todolist-network
 
 ....
 ```
@@ -284,7 +284,7 @@ This will result in the generation of Todo List app in the `angular-app` sub-fol
 You can run the app as shown below:
 
 ```
-$ cd ~/Workdir/todolist-network-hlfv1
+$ cd ~/Workdir/simple-todolist-network
 $ cd angular-app
 $ npm start
 

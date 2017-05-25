@@ -1,2 +1,2 @@
 set -x
-composer network deploy -a todolist-network-hlfv1.bna -p hlfv1 -i admin -s adminpw
+composer network deploy -a simple-todolist-network.bna -p hlfv1 -i admin -s adminpw

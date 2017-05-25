@@ -1,2 +1,2 @@
 set -x
-composer network list -n todolist-network-hlfv1 -p hlfv1 -i admin -s adminpw
+composer network list -n simple-todolist-network -p hlfv1 -i admin -s adminpw

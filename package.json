@@ -1,14 +1,14 @@
 {
-  "name": "todolist-network-hlfv1",
+  "name": "simple-todolist-network",
   "version": "1.0.0",
-  "description": "To Do List Network for Hyperledger Fabric V1",
+  "description": "Simple ToDo List Network for Hyperledger Fabric V1",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sanjay-saxena/todolist-network-hlfv1.git"
+    "url": "git+https://github.com/sanjay-saxena/simple-todolist-network.git"
   },
   "keywords": [
     "todo",
@@ -25,7 +25,7 @@
      "homedir": "^0.6.0"
   },
   "bugs": {
-    "url": "https://github.com/sanjay-saxena/todolist-network-hlfv1/issues"
+    "url": "https://github.com/sanjay-saxena/simple-todolist-network/issues"
   },
-  "homepage": "https://github.com/sanjay-saxena/todolist-network-hlfv1#readme"
+  "homepage": "https://github.com/sanjay-saxena/simple-todolist-network#readme"
 }
